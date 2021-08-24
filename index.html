@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取JSON</title>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <div class="myDiv" style="color:aliceblue"></div>
+    <button class="btn">获取数据</button>
+    <script type="text/javascript">
+    $(function(){
+        $(".btn").click(function(){
+            $(".myDiv").empty();//每次点击按钮清空原来数据，防止无限加载。
+            $.ajax({
+                url:"data.txt",
+                datatype:"json",
+                type:"GET",
+                 success:function(data){
+                    $.each($.parseJSON(data),function(n,item){  //.parseJSON（）方法把JSON字符串转换为javascript对象，不转换的话将会抛出错误。
+                        $(".myDiv").append("<p>key:"+item.optionKey+"</br>value:"+item.optionValue+"</p>");//控制输出的数据格式
+                    })
+                }
+            })
+        })
+    })
+    </script>
+</body>
+</html>
